@@ -43,7 +43,9 @@ export default function UserMonitor() {
       u.email.toLowerCase().includes(search.toLowerCase()) ||
       (u.full_name && u.full_name.toLowerCase().includes(search.toLowerCase()))
 
-    const matchesRole = roleFilter === 'ALL' || u.role === roleFilter
+    console.log(u)
+
+    const matchesRole = roleFilter === 'ALL' || u.roles.includes(roleFilter)
 
     return matchesSearch && matchesRole
   })
@@ -119,7 +121,7 @@ export default function UserMonitor() {
                 <th className="p-3 text-center">Acción</th>
               </tr>
             </thead>
-            <tbody className="divide-y-2 divide-black text-xs font-bold uppercase">
+            <tbody className="divide-y-2 divide-black text-xs font-bold">
               {filteredUsers.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="p-6 text-center font-black">
@@ -132,7 +134,7 @@ export default function UserMonitor() {
                     key={u.id}
                     className="transition-colors hover:bg-slate-100"
                   >
-                    <td className="flex items-center gap-3 border-r-2 border-black p-3 overflow-x-hidden">
+                    <td className="flex items-center gap-3 overflow-x-hidden border-r-2 border-black p-3">
                       {u.avatar_url ? (
                         <img
                           src={u.avatar_url}
@@ -141,12 +143,14 @@ export default function UserMonitor() {
                         />
                       ) : (
                         <div className="flex h-8 w-8 items-center justify-center border-2 border-black bg-yellow-300 font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                          {u.email[0].toUpperCase()}
+                          {u.email[0]}
                         </div>
                       )}
                       <span>{u.full_name || 'SIN NOMBRE'}</span>
                     </td>
-                    <td className="border-r-2 border-black p-3">{u.email}</td>
+                    <td className="border-r-2 border-black p-3">
+                      {u.email.toLowerCase()}
+                    </td>
                     <td className="border-r-2 border-black p-3">
                       <div className="flex flex-wrap gap-1">
                         {u.roles.length > 0 ? (

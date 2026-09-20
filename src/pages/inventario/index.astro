@@ -1,8 +1,43 @@
 ---
+import Layout from '@/layouts/Layout.astro'
 import { name } from '@/data/info.json'
-import Layout from '@/layouts/Layout.astro';
+import { supabase } from '@/lib/supabase'
+import InventoryManager from '@/components/inventory/InventoryManager'
+
+const { user } = Astro.locals
+
+if (!user) {
+  return Astro.redirect('/')
+}
 
 const title = `Inventario - ${name}`
 ---
 
-<Layout title={title} />
+<Layout title={title}>
+  <div
+    class="min-h-screen bg-cyan-400 px-4 py-12 font-mono text-black sm:px-6 lg:px-8"
+  >
+    <div class="mx-auto max-w-7xl">
+      <section class="mb-12">
+        <div
+          class="inline-block border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        >
+          <h1
+            class="flex items-center gap-4 text-4xl font-black tracking-tight uppercase sm:text-6xl"
+          >
+            INVENTARIO
+          </h1>
+        </div>
+        <p
+          class="mt-6 max-w-2xl border-l-4 border-black bg-white p-4 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+        >
+          Sistema de gestión de componentes IOTUS. Consulta stock, registra
+          préstamos y realiza devoluciones.
+        </p>
+      </section>
+
+      <!-- Cargamos el componente React pasando el ID del usuario -->
+      <InventoryManager userId={user.id} client:load />
+    </div>
+  </div>
+</Layout>
