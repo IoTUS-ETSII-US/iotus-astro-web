@@ -42,7 +42,7 @@ projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
               <!-- Título & Descripción -->
               <h2 class="mb-2 text-2xl font-black uppercase tracking-tight">
-                <a href={`/proyectos/${project.id.split("/")[1]}`} class="hover:underline">
+                <a href={`/proyectos/${projects[0].id.split("/")[1]}`} class="hover:underline">
                   {project.data.title}
                 </a>
               </h2>
@@ -62,10 +62,10 @@ projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
               </div>
 
               <a
-                href={`/proyectos/${project.id.split("/")[1]}`}
+                href={`/proyectos/${projects[0].id.split("/")[1]}`}
                 class="block w-full border-2 border-black bg-yellow-300 py-2 text-center text-xs font-black uppercase shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-pink-400 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
-                VER PROYECTO ➔
+                VER PROYECTO
               </a>
             </div>
           </article>
