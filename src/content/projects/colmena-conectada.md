@@ -1,5 +1,6 @@
 ---
 title: 'Colmena conectada'
+slug: 'colmena-conectada'
 description: 'Proyecto · Sensórica ambiental · Finca experimental, ETSIA · 3 colmenas'
 pubDate: 2026-08-10
 tags: ['Arduino Nano 33 IoT', 'DHT22', 'LoRa punto a punto', 'InfluxDB']

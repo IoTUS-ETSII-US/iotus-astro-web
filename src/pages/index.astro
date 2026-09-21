@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { name } from '@/data/info.json'
+import SEOLayout from '@/layouts/SEOLayout.astro'
 
 const title = `Home - ${name}`
 
@@ -26,7 +27,7 @@ const features = [
 ]
 ---
 
-<Layout title={title}>
+<SEOLayout title={title} description='Página principal IOTUS'>
   <div class="w-full bg-cyan-400 font-mono text-black">
     <section
       class="border-b-4 border-black bg-cyan-400 px-4 py-16 sm:px-6 lg:px-8"

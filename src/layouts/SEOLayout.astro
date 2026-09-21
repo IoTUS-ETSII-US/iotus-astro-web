@@ -1,0 +1,70 @@
+---
+import '@/styles/global.css'
+import Header from '@/components/header/Header.astro'
+import Footer from '@/components/footer/Footer.astro'
+
+interface Props {
+  title: string
+  description: string
+  canonical?: string
+  image?: string
+  type?: 'website' | 'article' | 'product'
+  noindex?: boolean
+}
+
+const {
+  title,
+  description,
+  // Utilizamos Astro.url.href como fallback, pero removemos barras finales inconsistentes
+  canonical = Astro.url.href.replace(/\/$/, ''),
+  image = new URL('/images/logo-image.avif', Astro.site).href,
+  type = 'website',
+  noindex = false,
+} = Astro.props
+
+const siteName = 'iotus etsii'
+const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{formattedTitle}</title>
+
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Control de indexación dinámico -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <meta name="robots" content="index, follow" />}
+
+    <!-- Protocolo Open Graph (Facebook, LinkedIn, Discord) -->
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={formattedTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={`Imagen de ${title}`} />
+
+    <!-- Twitter Cards (X) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tuusuario" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={formattedTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </head>
+  <body class="flex min-h-screen flex-col bg-slate-50 font-mono">
+    <Header />
+    <main class="flex flex-1 flex-col">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

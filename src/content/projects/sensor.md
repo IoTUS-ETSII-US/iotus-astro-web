@@ -1,5 +1,6 @@
 ---
 title: "IOTUS Gateway Node"
+slug: "iotus-gateway-node"
 description: "Hub de sensores bajo protocolo MQTT para monitoreo de estado en tiempo real."
 pubDate: 2026-08-10
 tags: ["ESP32", "MQTT", "C++"]

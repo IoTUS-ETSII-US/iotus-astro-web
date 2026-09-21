@@ -1,8 +1,9 @@
 ---
 import { name } from '@/data/info.json'
-import Layout from '@/layouts/Layout.astro';
+import SEOLayout from '@/layouts/SEOLayout.astro';
 
 const title = `Noticias - ${name}`
+const description = 'Noticias del departamento IOTUS'
 ---
 
-<Layout title={title} />
+<SEOLayout title={title} description={description}/>

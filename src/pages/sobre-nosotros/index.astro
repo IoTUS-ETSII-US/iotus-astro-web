@@ -1,8 +1,9 @@
 ---
 import { name } from '@/data/info.json'
-import Layout from '@/layouts/Layout.astro';
+import SEOLayout from '@/layouts/SEOLayout.astro';
 
 const title = `Sobre nosotros - ${name}`
+const description = 'Conócenos y únete a la asociación de IOTUS'
 ---
 
-<Layout title={title} />
+<SEOLayout title={title} description={description} />
