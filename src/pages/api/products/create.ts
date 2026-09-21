@@ -33,7 +33,7 @@ export const POST: APIRoute = async (context) => {
     // 2. Ejecutar la actualización filtrando por el ID
     const { data: product, error: updateError } = await supabaseAdmin
       .from('products')
-      .update({
+      .insert({
         category_id,
         name,
         description,
@@ -42,7 +42,6 @@ export const POST: APIRoute = async (context) => {
         total_stock,
         available_stock,
       })
-      .eq('id', id)
       .select()
       .single()
 
