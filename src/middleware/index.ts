@@ -12,7 +12,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // Expone el usuario en context.locals para consumirlo en paginas
   context.locals.user = user
-  console.log(user)
 
   // Protege la ruta de Perfil (requiere cualquier usuario autenticado)
   if (url.pathname.startsWith('/perfil') && !user) {
@@ -26,7 +25,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
 
     // Consultar roles en Supabase
-    const hasPermission = await isInventoryAvailable(supabase, user);
+    const hasPermission = await isInventoryAvailable(supabase, user)
 
     if (!hasPermission) {
       return redirect('/?error=unauthorized')

@@ -1,0 +1,97 @@
+---
+import LogoImage from '@/assets/images/logo-image.avif'
+import { name } from '@/data/info.json'
+---
+
+<section class="border-b-4 border-black bg-cyan-400 px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="flex flex-col items-start gap-6 lg:col-span-7">
+        <div
+          class="inline-block border-2 border-black bg-white px-3 py-1 text-xs font-black uppercase shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+        >
+          Bienvenido a {name}, una asociación de la&nbsp;
+          <a
+            href="https://www.informatica.us.es/"
+            target="_blank"
+            class="text-blue-600 underline">ETSII</a
+          >
+        </div>
+
+        <h1
+          class="text-4xl font-black tracking-tight text-black uppercase sm:text-6xl lg:text-7xl"
+        >
+          TECNOLOGÍA <br />
+          <span class="border-b-4 border-black bg-yellow-300 px-2"
+            >SIN FILTROS</span
+          >
+        </h1>
+
+        <p
+          class="max-w-2xl border-l-4 border-black bg-white p-4 text-base font-bold text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:text-lg"
+        >
+          Somos IOTUS, una asociación de la <a
+            href="https://www.us.es/"
+            target="_blank"
+            class="text-blue-600 underline underline-offset-4 transition-all hover:underline-offset-2"
+            >Universidad de Sevilla</a
+          > dedicada al Internet de las cosas (Internet of Things)
+        </p>
+
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a
+            href="/proyectos"
+            class="border-4 border-black bg-yellow-300 px-6 py-3 text-lg font-black text-black uppercase shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-1.5 active:translate-y-1.5 active:shadow-none"
+          >
+            Explorar Proyectos
+          </a>
+          <a
+            href="/noticias"
+            class="border-4 border-black bg-white px-6 py-3 text-lg font-black text-black uppercase shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-black hover:text-yellow-300 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none"
+          >
+            Noticias
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div
+          class="relative border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        >
+          <div
+            class="mb-4 flex items-center justify-between border-b-4 border-black pb-3"
+          >
+            <span
+              class="border-2 border-black bg-red-400 px-2 py-0.5 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+            >
+              LIVE STATUS
+            </span>
+            <span class="text-xs font-black">SYS.SYS_v2.6</span>
+          </div>
+
+          <div
+            class="mb-6 flex items-center justify-center border-4 border-black px-4 py-10"
+          >
+            <img src={LogoImage.src} alt="Imagen de logo de IOTUS" />
+          </div>
+
+          <div class="space-y-3 text-sm font-bold">
+            <div class="flex justify-between border-b-2 border-black pb-1">
+              <span>ESTADO RED:</span>
+              <span class="border border-black bg-emerald-400 px-1">ONLINE</span
+              >
+            </div>
+            <div class="flex justify-between border-b-2 border-black pb-1">
+              <span>PROTOCOLO:</span>
+              <span>MQTT / HTTP2</span>
+            </div>
+            <div class="flex justify-between">
+              <span>LATENCIA:</span>
+              <span>12ms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

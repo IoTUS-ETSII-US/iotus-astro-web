@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   // 4. Mapear las URLs dinámicas con sus marcas de tiempo y metadatos
   const dynamicProjectUrls = projects.map((project) => ({
-    url: `/proyectos/${project.data.slug ?? project.id}`, //[cite: 1]
+    url: `/proyectos/${project.id}`, //[cite: 1]
     lastmod: project.data.pubDate ? new Date(project.data.pubDate).toISOString() : new Date().toISOString(), //[cite: 1]
     changefreq: 'monthly',
     priority: '0.8',

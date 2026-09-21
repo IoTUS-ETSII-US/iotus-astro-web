@@ -23,7 +23,10 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => page !== 'https://iotus.etsii.es/admin',
+      filter: (page) =>
+        page !== 'https://iotus.etsii.es/admin' &&
+        page !== 'https://iotus.etsii.es/inventario' &&
+        page !== 'https://iotus.etsii.es/perfil',
     }),
   ],
 })

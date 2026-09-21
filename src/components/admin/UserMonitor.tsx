@@ -43,8 +43,6 @@ export default function UserMonitor() {
       u.email.toLowerCase().includes(search.toLowerCase()) ||
       (u.full_name && u.full_name.toLowerCase().includes(search.toLowerCase()))
 
-    console.log(u)
-
     const matchesRole = roleFilter === 'ALL' || u.roles.includes(roleFilter)
 
     return matchesSearch && matchesRole
