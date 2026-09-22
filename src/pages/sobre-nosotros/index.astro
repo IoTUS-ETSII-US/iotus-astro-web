@@ -1,9 +1,43 @@
 ---
 import { name } from '@/data/info.json'
-import SEOLayout from '@/layouts/SEOLayout.astro';
+import SEOLayout from '@/layouts/SEOLayout.astro'
+import { getEntry, render } from 'astro:content'
 
 const title = `Sobre nosotros - ${name}`
 const description = 'Conócenos y únete a la asociación de IOTUS'
+
+const aboutus = await getEntry('aboutus', `about-us`)
+
+if (!aboutus) {
+  throw new Error('Project not found')
+}
+
+const { Content } = await render(aboutus)
 ---
 
-<SEOLayout title={title} description={description} />
+<SEOLayout title={title} description={description}>
+  <div class="w-full bg-cyan-400 py-12 min-h-200">
+    <section class="mx-auto flex max-w-7xl flex-col gap-4 md:gap-8">
+      <div class="">
+        <div
+          class="inline-block border-4 border-black bg-yellow-300 p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+        >
+          <h1 class="text-4xl font-black tracking-tight uppercase sm:text-6xl">
+            Sobre Nosotros
+          </h1>
+        </div>
+      </div>
+
+      <div
+        class="border-4 border-black bg-neutral-100 px-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sm:px-6 md:px-8"
+      >
+        <div
+          id="about-us-main-content"
+          class="prose prose-slate prose-headings:font-black prose-headings:uppercase prose-h1:border-b-2 prose-h1:border-black prose-code:border prose-code:border-black prose-code:bg-yellow-200 prose-code:px-1 prose-img:border-4 prose-img:border-black prose-img:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] max-w-none font-mono font-medium"
+        >
+          <Content />
+        </div>
+      </div>
+    </section>
+  </div>
+</SEOLayout>

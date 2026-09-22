@@ -8,7 +8,7 @@ if (!slug) {
   throw new Error('No se ha proporcionado url valida')
 }
 
-const project = await getEntry('projects', `projects/${slug}`)
+const project = await getEntry('projects', `${slug}`)
 
 if (!project) {
   throw new Error('Project not found')
