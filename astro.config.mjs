@@ -11,7 +11,7 @@ import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://iotus.etsii.es',
+  site: 'https://www.iotus.etsii.es',
   output: 'server',
   trailingSlash: 'never',
   adapter: cloudflare(),
