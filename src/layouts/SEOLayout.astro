@@ -43,6 +43,11 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {!noindex && <meta name="robots" content="index, follow" />}
 
+    <meta
+      name="google-site-verification"
+      content="U3RAZUrqOIdclYnOr52XrECPr178YH9NyJcDnouQrHg"
+    />
+
     <!-- Protocolo Open Graph (Facebook, LinkedIn, Discord) -->
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content={type} />
