@@ -18,7 +18,7 @@ title: 'Sobre Nosotros'
 - Secretariado: Angelo Sho Moraschi, Miguel Angel Orts Arjona (suplente).
 - Tesorería: Paula Heimberg Gonzalez, Miguel Ferreira Cordero.
 - Vocales: Jose Manuel Corral Trigos, Israel Muñoz Falcón, Manuel Mendez Rastrojo.
-- Llaveros:  Miguel Toro Llamas, Ibrahim Abughazala Najjar, Alejandro Macias Chavez.
+- Llaveros:  Miguel Toro Llamas, Ibrahim Abughazala Najjar, Alejandro Macias Chaves.
 
 ## Miembros Pasados
 
