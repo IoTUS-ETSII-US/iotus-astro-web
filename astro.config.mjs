@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-check 
 import { defineConfig } from 'astro/config'
 
 import cloudflare from '@astrojs/cloudflare'
@@ -11,7 +11,7 @@ import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.iotus.etsii.es',
+  site: 'https://iotus.etsii.es',
   output: 'server',
   trailingSlash: 'never',
   adapter: cloudflare(),
