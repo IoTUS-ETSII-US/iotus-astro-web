@@ -1,0 +1,30 @@
+---
+import type { WithContext, TechArticle } from 'schema-dts'
+import { name } from '@/data/info.json'
+
+interface Props {
+  projectName: string
+  summary: string
+  launchDate: Date
+  techStack: string[]
+}
+
+const { projectName, summary, launchDate, techStack } = Astro.props
+
+const projectSchema: WithContext<TechArticle> = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: `Proyecto: ${projectName}`,
+  description: summary,
+  datePublished: launchDate.toISOString(),
+  dependencies: techStack.join(', '),
+  proficiencyLevel: 'Beginner/Advanced',
+  author: {
+    '@type': 'Organization',
+    name: name,
+    url: 'https://iotus.etsii.com',
+  },
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />

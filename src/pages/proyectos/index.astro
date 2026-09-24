@@ -1,17 +1,17 @@
 ---
 import { getCollection } from 'astro:content'
-import Layout from '@/layouts/Layout.astro'
 import { name } from '@/data/info.json'
 import SEOLayout from '@/layouts/SEOLayout.astro'
 
-const title = `Proyectos - ${name}`
+const title = `${name} - Proyectos de nuestro nuestra asociacion ${name}`
+const description = `Proyectos principales desarrollados en la asociacion ${name} de la ETSII`
 
 const projects = await getCollection('projects')
 
 projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
-<SEOLayout title={title} description='Nuestros proyectos principales del departamento IOTUS'>
+<SEOLayout title={title} description={description}>
   <div class="w-full bg-cyan-400 font-mono text-black px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       

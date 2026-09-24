@@ -2,6 +2,8 @@
 import '@/styles/global.css'
 import Header from '@/components/header/Header.astro'
 import Footer from '@/components/footer/Footer.astro'
+import type { Project } from '@/types/Project.interface'
+import ProjectsSEO from '@/components/seo/ProjectsSEO.astro'
 
 interface Props {
   title: string
@@ -9,17 +11,20 @@ interface Props {
   canonical?: string
   image?: string
   type?: 'website' | 'article'
+  schema?: 'project' | 'news' | null
+  project?: Project
   noindex?: boolean
 }
 
 const {
   title,
   description,
-  // Utilizamos Astro.url.href como fallback, pero removemos barras finales inconsistentes
   canonical = Astro.url.href.replace(/\/$/, ''),
   image = new URL('/images/logo-image.avif', Astro.site).href,
   type = 'website',
+  schema = null,
   noindex = false,
+  project = null,
 } = Astro.props
 
 const siteName = 'iotus etsii'
@@ -31,11 +36,10 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{formattedTitle}</title>
 
+    <title>{formattedTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
@@ -64,6 +68,17 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
     <meta name="twitter:title" content={formattedTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    {
+      schema === 'project' && project && (
+        <ProjectsSEO
+          projectName={project.data.title}
+          launchDate={project.data.pubDate}
+          summary={project.data.description}
+          techStack={project.data.tags}
+        />
+      )
+    }
   </head>
   <body class="flex min-h-screen flex-col bg-slate-50 font-mono">
     <Header />

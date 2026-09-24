@@ -1,0 +1,38 @@
+---
+import type { WithContext, NewsArticle } from 'schema-dts';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage: string;
+}
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const newsSchema: WithContext<NewsArticle> = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": title,
+  "description": description,
+  "image": [heroImage],
+  "datePublished": pubDate.toISOString(),
+  "dateModified": updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+  "author": [{
+    "@type": "Person",
+    "name": "Nombre del Redactor",
+    "url": "https://tusitio.com"
+  }],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nombre de tu Medio",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tusitio.com"
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(newsSchema)} />
