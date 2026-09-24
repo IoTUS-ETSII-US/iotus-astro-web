@@ -1,0 +1,24 @@
+---
+interface Props {
+  data: {
+    siteName: string
+    type: string
+    canonical: string
+    formattedTitle: string
+    description: string
+    image: string
+    title: string
+  }
+}
+
+const { data } = Astro.props
+---
+
+<!-- Protocolo Open Graph (Facebook, LinkedIn, Discord) -->
+<meta property="og:site_name" content={data.siteName} />
+<meta property="og:type" content={data.type} />
+<meta property="og:url" content={data.canonical} />
+<meta property="og:title" content={data.formattedTitle} />
+<meta property="og:description" content={data.description} />
+<meta property="og:image" content={data.image} />
+<meta property="og:image:alt" content={`Imagen de ${data.title}`} />

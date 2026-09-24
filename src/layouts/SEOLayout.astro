@@ -4,6 +4,8 @@ import Header from '@/components/header/Header.astro'
 import Footer from '@/components/footer/Footer.astro'
 import type { Project } from '@/types/Project.interface'
 import ProjectsSEO from '@/components/seo/ProjectsSEO.astro'
+import TwitterSEO from '@/components/seo/TwitterSEO.astro'
+import OpenGraphSEO from '@/components/seo/OpenGraphSEO.astro'
 
 interface Props {
   title: string
@@ -52,22 +54,18 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
       content="U3RAZUrqOIdclYnOr52XrECPr178YH9NyJcDnouQrHg"
     />
 
-    <!-- Protocolo Open Graph (Facebook, LinkedIn, Discord) -->
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:type" content={type} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={formattedTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:image:alt" content={`Imagen de ${title}`} />
-
-    <!-- Twitter Cards (X) -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@tuusuario" />
-    <meta name="twitter:url" content={canonical} />
-    <meta name="twitter:title" content={formattedTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <OpenGraphSEO
+      data={{
+        siteName,
+        type,
+        canonical,
+        formattedTitle,
+        description,
+        image,
+        title,
+      }}
+    />
+    <TwitterSEO data={{ canonical, formattedTitle, description, image }} />
 
     {
       schema === 'project' && project && (
