@@ -67,7 +67,7 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
     />
     <TwitterSEO data={{ canonical, formattedTitle, description, image }} />
 
-    <!-- {
+    {
       schema === 'project' && project && (
         <ProjectsSEO
           projectName={project.data.title}
@@ -76,7 +76,7 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
           techStack={project.data.tags}
         />
       )
-    } -->
+    }
   </head>
   <body class="flex min-h-screen flex-col bg-slate-50 font-mono">
     <Header />
