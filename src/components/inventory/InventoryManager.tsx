@@ -3,6 +3,7 @@ import ProductCard from '@/components/inventory/ProductCard'
 import type { Product } from '@/types/Product.interface'
 import ProductMovementPopUp from '@/components/inventory/ProductMovementPopUp'
 import ActionButtons from '@/components/inventory/actionButtons/actionButtons'
+import CreateProductCard from './createProductCard'
 
 export default function InventoryManager({ userId }: { userId: string }) {
   const [products, setProducts] = useState<Product[]>([])
@@ -10,6 +11,8 @@ export default function InventoryManager({ userId }: { userId: string }) {
   const [loading, setLoading] = useState(true)
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [isCreateProductCardOpen, setIsCreateProductCardOpen] =
+    useState<boolean>(false)
 
   useEffect(() => {
     fetchProducts()
@@ -19,11 +22,20 @@ export default function InventoryManager({ userId }: { userId: string }) {
     setSelectedProduct(newProduct)
   }
 
+  function handleOpenCreateProductCard(isOpen: boolean) {
+    setIsCreateProductCardOpen(isOpen)
+  }
+
   const handleProductUpdated = (updatedProduct: Product) => {
     setProducts((prevProducts) =>
       prevProducts.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
     )
   }
+
+  // CORREGIDO: Mapeo inmutable del nuevo array
+  // const handleProductCreated = (newProduct: Product) => {
+  //   setProducts((prevProducts) => [...prevProducts, newProduct])
+  // }
 
   async function fetchProducts() {
     setLoading(true)
@@ -57,8 +69,8 @@ export default function InventoryManager({ userId }: { userId: string }) {
             className="w-full border-4 border-black bg-white p-4 text-sm font-black uppercase placeholder-slate-500 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] focus:outline-none"
           />
         </div>
-        <div id='options-container' className='hidden md:flex md:w-1/2'>
-          <ActionButtons />
+        <div id="options-container" className="hidden md:flex md:w-1/2">
+          <ActionButtons openCreateProductCard={handleOpenCreateProductCard} />
         </div>
       </div>
 
@@ -77,8 +89,9 @@ export default function InventoryManager({ userId }: { userId: string }) {
               <ProductCard
                 key={p.id}
                 product={p}
-                onProductSelected={handleSelectedProduct}
-                onProductUpdated={handleProductUpdated}
+                onSelected={handleSelectedProduct}
+                onUpdated={handleProductUpdated}
+                onRemoved={fetchProducts}
               />
             ))
           )}
@@ -91,6 +104,13 @@ export default function InventoryManager({ userId }: { userId: string }) {
           userId={userId}
           onProductSelected={handleSelectedProduct}
           fetchProducts={fetchProducts}
+        />
+      )}
+
+      {isCreateProductCardOpen && (
+        <CreateProductCard
+          openCreateProductCard={handleOpenCreateProductCard}
+          onProductCreated={fetchProducts}
         />
       )}
     </div>

@@ -15,7 +15,7 @@ title: 'Sobre Nosotros'
 
 ## Junta Directiva Actual
 
-- Presidencia: Jesús Carrascosa Carro.
+- Presidencia: [Jesús Carrascosa Carro](https://www.linkedin.com/in/jesuscarrascosacarro/).
 - Vicepresidencia: Alvaro gonzalez Limón.
 - Secretariado: Angelo Sho Moraschi, Miguel Angel Orts Arjona (suplente).
 - Tesorería: Paula Heimberg Gonzalez, Miguel Ferreira Cordero.

@@ -13,14 +13,16 @@ interface Category {
 
 interface ProductCardProps {
   product: Product
-  onProductSelected: (product: Product) => void
-  onProductUpdated?: (updatedProduct: Product) => void
+  onSelected: (product: Product) => void
+  onUpdated?: (updatedProduct: Product) => void
+  onRemoved: (refresh: boolean) => void
 }
 
 export default function ProductCard({
   product,
-  onProductSelected,
-  onProductUpdated,
+  onSelected,
+  onUpdated,
+  onRemoved,
 }: ProductCardProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -56,7 +58,6 @@ export default function ProductCard({
     }
   }
 
-  // Manejador actualizado para soportar HTMLSelectElement
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -91,8 +92,8 @@ export default function ProductCard({
       setIsEditing(false)
 
       // Notificamos al componente padre enviándole el producto actualizado
-      if (onProductUpdated) {
-        onProductUpdated(result.data || formData)
+      if (onUpdated) {
+        onUpdated(result.data || formData)
       }
 
       notify('Producto actualizado con éxito', 'success')
@@ -106,6 +107,30 @@ export default function ProductCard({
       )
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleDeleteProduct(productId: string) {
+    if (!confirm('¿Estás seguro de que deseas eliminar este componente?'))
+      return
+
+    try {
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'DELETE',
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || 'No se pudo eliminar el producto')
+      }
+
+      // Refrescar la lista en el cliente tras eliminar
+      onRemoved(true)
+    } catch (err) {
+      alert(
+        err instanceof Error ? err.message : 'Error al eliminar el producto'
+      )
     }
   }
 
@@ -130,8 +155,8 @@ export default function ProductCard({
                 <SquarePen className="h-5 w-5" />
               </button>
               <button
-                id={`remove-${product.id}`}
                 type="button"
+                onClick={() => handleDeleteProduct(product.id)}
                 className="cursor-pointer border-2 border-black bg-red-500 p-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
               >
                 <Trash className="h-5 w-5" />
@@ -157,7 +182,7 @@ export default function ProductCard({
         </div>
 
         <button
-          onClick={() => onProductSelected(product)}
+          onClick={() => onSelected(product)}
           className="w-full cursor-pointer border-2 border-black bg-pink-400 py-2 text-xs font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-pink-500 active:translate-x-1 active:translate-y-1 active:shadow-none"
         >
           REGISTRAR MOVIMIENTO
