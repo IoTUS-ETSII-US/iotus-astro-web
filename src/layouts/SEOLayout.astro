@@ -46,8 +46,8 @@ const formattedTitle = title === siteName ? title : `${title} | ${siteName}`
     <link rel="canonical" href={canonical} />
 
     <!-- Control de indexación dinámico -->
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
-    {!noindex && <meta name="robots" content="index, follow" />}
+    <!-- {noindex && <meta name="robots" content="noindex, nofollow" />} -->
+    <meta name="robots" content="index, follow" />
 
     <meta
       name="google-site-verification"

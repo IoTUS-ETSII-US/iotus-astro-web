@@ -1,0 +1,65 @@
+---
+import { getEntry, render } from 'astro:content'
+import { name } from '@/data/info.json'
+import SEOLayout from '@/layouts/SEOLayout.astro'
+
+const { slug } = Astro.params
+
+if (!slug) {
+  throw new Error('No se ha proporcionado url valida')
+}
+
+const noticia = await getEntry('news', `${slug}`)
+
+if (!noticia) {
+  throw new Error('New not found')
+}
+
+const { Content } = await render(noticia)
+
+const title = `${name} - ${noticia.data.title} ${name}`
+const description = noticia.data.description
+---
+
+<SEOLayout title={title} description={description}>
+  <div
+    class="min-h-[calc(100dvh-250px)] w-full bg-cyan-400 px-4 py-12 font-mono text-black sm:px-6 lg:px-8"
+  >
+    <article
+      class="mx-auto max-w-4xl border-4 border-black bg-white p-6 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] md:p-10"
+    >
+      <a
+        href="/proyectos"
+        class="mb-6 inline-block border-2 border-black bg-yellow-300 px-3 py-1 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-pink-400"
+      >
+        Volver a Noticias
+      </a>
+
+      <header class="mb-8 border-b-4 border-black pb-6">
+        <div class="mb-3 flex items-center gap-2">
+          <time class="text-xs font-bold">
+            {
+              noticia.data.pubDate.toLocaleDateString('es-ES', {
+                dateStyle: 'long',
+              })
+            }
+          </time>
+        </div>
+
+        <h1 class="text-3xl font-black uppercase sm:text-5xl">
+          {noticia.data.title}
+        </h1>
+        <p class="mt-3 text-sm font-bold text-slate-700">
+          {noticia.data.description}
+        </p>
+      </header>
+
+      <div
+        id="main-content"
+        class="prose prose-slate prose-headings:font-black prose-headings:uppercase prose-h1:border-b-2 prose-h1:border-black prose-code:border prose-code:border-black prose-code:bg-yellow-200 prose-code:px-1 prose-img:border-4 prose-img:border-black prose-img:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] max-w-none font-mono font-medium"
+      >
+        <Content />
+      </div>
+    </article>
+  </div>
+</SEOLayout>

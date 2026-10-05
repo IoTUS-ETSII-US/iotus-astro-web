@@ -2,7 +2,6 @@ import { createClient } from '@supabase/supabase-js'
 import {
   createServerClient,
   parseCookieHeader,
-  serializeCookieHeader,
 } from '@supabase/ssr'
 import type { AstroCookieSetOptions } from 'astro'
 

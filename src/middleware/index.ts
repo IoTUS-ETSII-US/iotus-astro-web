@@ -1,16 +1,17 @@
 import { defineMiddleware } from 'astro:middleware'
-import { createSupabaseServerClient } from '@/lib/supabase'
 import { isInventoryAvailable } from './utils/checkInventory'
+import { createSupabaseServerClient } from '@/lib/supabase'
+import { $user } from '@/store/user'
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url, redirect } = context
+
   const supabase = createSupabaseServerClient(context)
 
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Expone el usuario en context.locals para consumirlo en paginas
   context.locals.user = user
 
   // Protege la ruta de Perfil (requiere cualquier usuario autenticado)

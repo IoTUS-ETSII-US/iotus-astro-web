@@ -1,8 +1,11 @@
+import { $user } from '@/store/user'
+import type { User } from '@supabase/supabase-js'
 import React, { useState } from 'react'
 
 interface AuthResponse {
   error?: string
   message?: string
+  user?: User
 }
 
 export default function LoginForm() {
@@ -11,29 +14,32 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  // 1. Declaramos e.preventDefault() sin necesidad de importar FormEvent
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setErrorMessage(null)
 
     try {
-      const formData = new FormData()
-      formData.append('email', email)
-      formData.append('password', password)
-
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       })
 
+      const data = (await response
+        .json()
+        .catch(() => null)) as AuthResponse | null
+
       if (!response.ok) {
-        const data = (await response
-          .json()
-          .catch(() => null)) as AuthResponse | null
         throw new Error(
           data?.error || 'Credenciales inválidas o error en el servidor.'
         )
+      }
+
+      if (data?.user) {
+        $user.set(data.user)
       }
 
       window.location.href = '/'

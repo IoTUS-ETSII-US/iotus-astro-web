@@ -1,19 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { createSupabaseServerClient } from '@/lib/supabase'
 import { name } from '@/data/info.json'
 import LoginForm from '@/components/auth/LoginForm'
 
 const title = `Iniciar Sesión - ${name}`
-
-const supabase = createSupabaseServerClient(Astro)
-const {
-  data: { user },
-} = await supabase.auth.getUser()
-
-if (user) {
-  return Astro.redirect('/')
-}
 ---
 
 <Layout title={title}>

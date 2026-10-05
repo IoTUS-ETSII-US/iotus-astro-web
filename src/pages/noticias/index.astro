@@ -1,9 +1,106 @@
 ---
 import { name } from '@/data/info.json'
-import SEOLayout from '@/layouts/SEOLayout.astro';
+import SEOLayout from '@/layouts/SEOLayout.astro'
+import { getCollection } from 'astro:content'
 
 const title = `Noticias - ${name}`
 const description = 'Noticias del departamento IOTUS'
+
+const newsEntries = await getCollection('news')
+
+const sortedNews = newsEntries.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime()
+  const dateB = new Date(b.data.pubDate).getTime()
+  return dateB - dateA
+})
 ---
 
-<SEOLayout title={title} description={description}/>
+<SEOLayout title={title} description={description}>
+  <div
+    class="w-full bg-cyan-400 px-4 py-12 font-mono text-black sm:px-6 lg:px-8"
+  >
+    <div class="mx-auto max-w-7xl">
+      <!-- Encabezado de la página -->
+      <header class="mb-12">
+        <div
+          class="inline-block border-4 border-black bg-yellow-300 p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+        >
+          <h1 class="text-4xl font-black tracking-tight uppercase sm:text-6xl">
+            NOTICIAS DE IOTUS
+          </h1>
+        </div>
+        <p
+          class="mt-4 max-w-2xl border-l-4 border-black bg-white p-3 text-sm font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+        >
+          No te pierdas ninguna noticia nueva dentro de la asociación, próximos
+          talleres, charlas, etc.
+        </p>
+      </header>
+
+      <!-- Listado de noticias -->
+      {
+        sortedNews.length === 0 ? (
+          <div class="border-4 border-black bg-white p-8 text-center font-black uppercase shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <p class="text-lg">NO HAY NOTICIAS PUBLICADAS DE MOMENTO.</p>
+          </div>
+        ) : (
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {sortedNews.map((article) => {
+              const rawDate = article.data.pubDate
+              const formattedDate = rawDate
+                ? new Date(rawDate).toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                : 'SIN FECHA'
+
+              return (
+                <article class="flex flex-col justify-between border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+                  <div>
+                    {/* Fecha e Insignia */}
+                    <div class="mb-4 flex items-center justify-between border-b-2 border-black pb-2 text-xs font-black uppercase">
+                      <span class="inline-block border-2 border-black bg-cyan-400 px-2 py-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        {article.data.category || 'AVISO'}
+                      </span>
+                      <time
+                        datetime={rawDate?.toString()}
+                        class="text-slate-600"
+                      >
+                        {formattedDate}
+                      </time>
+                    </div>
+
+                    {/* Título de la noticia */}
+                    <h2 class="mb-3 text-xl leading-tight font-black tracking-tight uppercase">
+                      <a
+                        href={`/noticias/${article.id}`}
+                        class="hover:underline"
+                      >
+                        {article.data.title}
+                      </a>
+                    </h2>
+
+                    {/* Extracto/Descripción corta */}
+                    <p class="mb-6 line-clamp-3 text-xs leading-relaxed font-bold text-slate-700">
+                      {article.data.description ||
+                        'Sin descripción disponible.'}
+                    </p>
+                  </div>
+
+                  {/* Enlace al artículo completo */}
+                  <a
+                    href={`/noticias/${article.id}`}
+                    class="mt-4 block w-full border-2 border-black bg-lime-300 py-2.5 text-center text-xs font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-yellow-300 active:translate-x-1 active:translate-y-1 active:shadow-none"
+                  >
+                    LEER MÁS ➔
+                  </a>
+                </article>
+              )
+            })}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</SEOLayout>
