@@ -1,7 +1,7 @@
 ---
 interface Props {
   data: {
-    siteName: string
+    name: string
     type: string
     canonical: string
     formattedTitle: string
@@ -15,7 +15,7 @@ const { data } = Astro.props
 ---
 
 <!-- Protocolo Open Graph (Facebook, LinkedIn, Discord) -->
-<meta property="og:site_name" content={data.siteName} />
+<meta property="og:site_name" content={data.name} />
 <meta property="og:type" content={data.type} />
 <meta property="og:url" content={data.canonical} />
 <meta property="og:title" content={data.formattedTitle} />

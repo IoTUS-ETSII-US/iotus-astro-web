@@ -4,15 +4,12 @@ import SEOLayout from '@/layouts/SEOLayout.astro'
 // Componentes
 import MainSection from '@/components/home/MainSection.astro'
 import CategoriesSection from '@/components/home/CategoriesSection.astro'
-import MailingSection from '@/components/home/MailingSection.astro'
 
-// Datos
-import { name } from '@/data/info.json'
-
-const title = `Home - ${name}`
+const title = 'Página principal'
+const description = 'Bienvenido a la página principal de la asociación IOTUS, ubicados en la ETSII. No te pierdas nada nuevo!'
 ---
 
-<SEOLayout title={title} description="Página principal IOTUS">
+<SEOLayout title={title} description={description}>
   <div class="w-full bg-cyan-400 font-mono text-black">
     <MainSection />
     <CategoriesSection />

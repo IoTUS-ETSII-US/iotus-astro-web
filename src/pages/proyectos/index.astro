@@ -1,10 +1,9 @@
 ---
 import { getCollection } from 'astro:content'
-import { name } from '@/data/info.json'
 import SEOLayout from '@/layouts/SEOLayout.astro'
 
-const title = `${name} - Proyectos de nuestro nuestra asociacion ${name}`
-const description = `Proyectos principales desarrollados en la asociacion ${name} de la ETSII`
+const title = 'Proyectos de nuestra asociación'
+const description = 'Proyectos principales desarrollados en la asociación de la ETSII'
 
 const projects = await getCollection('projects')
 

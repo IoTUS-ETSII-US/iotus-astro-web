@@ -1,10 +1,6 @@
 ---
-import { name } from '@/data/info.json'
 import SEOLayout from '@/layouts/SEOLayout.astro'
 import { getCollection } from 'astro:content'
-
-const title = `Noticias - ${name}`
-const description = 'Noticias del departamento IOTUS'
 
 const newsEntries = await getCollection('news')
 
@@ -13,6 +9,9 @@ const sortedNews = newsEntries.sort((a, b) => {
   const dateB = new Date(b.data.pubDate).getTime()
   return dateB - dateA
 })
+
+const title = 'Nuestras noticias'
+const description = 'Todas las noticias de nuestra asociación.'
 ---
 
 <SEOLayout title={title} description={description}>

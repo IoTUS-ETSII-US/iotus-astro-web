@@ -16,14 +16,11 @@ if (!project) {
 }
 
 const { Content } = await render(project)
-
-const title = `${name} - ${project.data.title} ${name}`
-const description = project.data.description
 ---
 
 <SEOLayout
-  title={title}
-  description={description}
+  title={project.data.title}
+  description={project.data.description}
   schema="project"
   project={project}
 >

@@ -16,12 +16,9 @@ if (!noticia) {
 }
 
 const { Content } = await render(noticia)
-
-const title = `${name} - ${noticia.data.title} ${name}`
-const description = noticia.data.description
 ---
 
-<SEOLayout title={title} description={description}>
+<SEOLayout title={noticia.data.title} description={noticia.data.description}>
   <div
     class="min-h-[calc(100dvh-250px)] w-full bg-cyan-400 px-4 py-12 font-mono text-black sm:px-6 lg:px-8"
   >
