@@ -1,9 +1,8 @@
 ---
-import { name } from '@/data/info.json'
 import SEOLayout from '@/layouts/SEOLayout.astro'
 import { getEntry, render } from 'astro:content'
 
-const title = `Sobre nosotros - ${name}`
+const title = 'Sobre nosotros'
 const description = 'Conócenos y únete a la asociación de IOTUS'
 
 const aboutus = await getEntry('aboutus', `about-us`)
