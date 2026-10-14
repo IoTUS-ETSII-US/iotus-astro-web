@@ -49,6 +49,15 @@ const formattedTitle = `${title} | ${name}`
     <!-- {noindex && <meta name="robots" content="noindex, nofollow" />} -->
     <meta name="robots" content="index, follow" />
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "IOTUS",
+        "alternateName": ["IOTUS ETSII"],
+        "url": "https://iotus.etsii.es/"
+      }
+    </script>
     <meta
       name="google-site-verification"
       content="U3RAZUrqOIdclYnOr52XrECPr178YH9NyJcDnouQrHg"
@@ -56,7 +65,7 @@ const formattedTitle = `${title} | ${name}`
 
     <OpenGraphSEO
       data={{
-        name ,
+        name,
         type,
         canonical,
         formattedTitle,
