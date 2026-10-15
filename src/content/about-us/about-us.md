@@ -18,7 +18,7 @@ title: 'Sobre Nosotros'
 - **Presidencia**: <a href="https://about.yisus.cc" target="_blank">Jesús Carrascosa Carro</a>
 - **Vicepresidencia**: <a href="https://mibullfire.com" target="_blank">Miguel Toro Llamas</a>
 - **Secretariado**: <a href="https://github.com/aleemacc" target="_blank">Alejandro Macias Chaves</a>
-- **Tesorería**: <a href="https://github.com/aleemacc" target="_blank">David González García</a>
+- **Tesorería**: <a href="https://www.linkedin.com/in/david-gonz%C3%A1lez-garc%C3%ADa-92268b293/" target="_blank">David González García</a>
 - **Vocales**: Paula Heimberg González, Jose Antonio Moreno Lanza, Ibrahim Abughazala Najjar, Angelo Sho Moraschi.
 - **Llaveros**: _Sin noticias por ahora_
 
